@@ -9,7 +9,7 @@ import com.littleapp.crypto.base.BaseFragment
 import com.littleapp.crypto.model.detail.CoinDetail
 import com.littleapp.crypto.model.detail.DetailResponse
 import com.littleapp.crypto.utils.loadImage
-import com.littleapp.crypto.databinding.FragmentDetailCryptoBinding
+import com.littleapp.crypto.databinding.FragmentDetailBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
@@ -17,7 +17,7 @@ import org.json.JSONObject
 
 @AndroidEntryPoint
 class DetailFragment :
-    BaseFragment<FragmentDetailCryptoBinding, DetailViewModel>(FragmentDetailCryptoBinding::inflate) {
+    BaseFragment<FragmentDetailBinding, DetailViewModel>(FragmentDetailBinding::inflate) {
 
     override val viewModel by viewModels<DetailViewModel>()
     private val args by navArgs<DetailFragmentArgs>()

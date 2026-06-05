@@ -1,19 +1,17 @@
 package com.littleapp.crypto.base
 
+import com.google.gson.Gson
+import com.littleapp.crypto.HiltApplication.Companion.getAppContext
 import com.littleapp.crypto.R
 import com.littleapp.crypto.model.errorResponse.ErrorResponse
 import com.littleapp.crypto.utils.NetworkResult
-import com.littleapp.crypto.HiltApplication.Companion.getAppContext
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 abstract class BaseRepository {
 
-    suspend fun <T> safeApiRequest(
-        apiRequest: suspend () -> T,
-    ): NetworkResult<T> {
+    suspend fun <T> safeApiRequest(apiRequest: suspend () -> T): NetworkResult<T> {
         return withContext(Dispatchers.IO) {
             try {
                 NetworkResult.Success(apiRequest.invoke())
@@ -21,10 +19,10 @@ abstract class BaseRepository {
                 when (throwable) {
                     is HttpException -> {
                         NetworkResult.Error(
-                            false,
-                            errorBodyParser(throwable.response()?.errorBody()?.string())
+                            false, errorBodyParser(throwable.response()?.errorBody()?.string())
                         )
                     }
+
                     else -> NetworkResult.Error(true, throwable.localizedMessage)
                 }
             }

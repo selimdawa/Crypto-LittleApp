@@ -2,21 +2,7 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.navigation.safeargs) apply false
+    alias(libs.plugins.google.ksp) apply false
+    alias(libs.plugins.hilt.android) apply false
 }
-
-/*buildscript{
-    dependencies{
-        def nav_version = "2.4.1"
-        def hilt_version = '2.42'
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-    }
-}
-
-
-plugins {
-    id 'com.android.application' version '7.2.2' apply false
-    id 'com.android.library' version '7.2.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
-}
-*/
