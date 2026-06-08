@@ -21,9 +21,8 @@ retrofit = "3.0.0"
 retrofitCoroutines = "0.9.2"
 okhttp = "5.3.2"
 gson = "2.14.0"
-coil = "2.7.0"
 paging = "3.5.0"
-ksp = "2.3.7"
+ksp = "2.3.8"
 viewbinding-delegate = "1.5.9"
 
 [libraries]
