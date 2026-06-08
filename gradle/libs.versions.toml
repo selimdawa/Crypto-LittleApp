@@ -24,6 +24,7 @@ gson = "2.14.0"
 coil = "2.7.0"
 paging = "3.5.0"
 ksp = "2.3.7"
+viewbinding-delegate = "1.5.9"
 
 [libraries]
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
@@ -56,9 +57,10 @@ google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gs
 # Hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
-# Coil & Paging
+# Other's
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+viewbinding-property-delegate = { group = "com.github.kirich1409", name = "viewbindingpropertydelegate-noreflection", version.ref = "viewbinding-delegate" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

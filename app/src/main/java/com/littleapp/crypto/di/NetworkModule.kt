@@ -2,7 +2,7 @@ package com.littleapp.crypto.di
 
 import com.littleapp.crypto.BuildConfig
 import com.littleapp.crypto.Unit.DATA
-import com.littleapp.crypto.network.ApiFactory
+import com.littleapp.crypto.network.CryptoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,7 +54,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApiFactory(retrofit: Retrofit): ApiFactory {
-        return retrofit.create(ApiFactory::class.java)
+    fun provideApiFactory(retrofit: Retrofit): CryptoApi {
+        return retrofit.create(CryptoApi::class.java)
     }
 }

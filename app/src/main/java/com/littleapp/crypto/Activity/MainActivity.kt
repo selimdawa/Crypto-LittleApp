@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     var context: Context = this@MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        THEME.setThemeOfApp(context)
+        //THEME.setThemeOfApp(context)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }

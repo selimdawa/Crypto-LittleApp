@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.hilt.android)
-    //id("kotlin-parcelize")
 }
 
 android {
@@ -18,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId = "com.littleapp.crypto"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -66,6 +65,7 @@ dependencies {
     implementation(libs.androidx.cardview)
     //Image
     implementation(libs.circleimageview)                //Circle image
+    implementation(libs.coil.kt)    //Coil
     //Navigation
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
@@ -81,10 +81,10 @@ dependencies {
     //Dagger - Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    //Needed
+    //Other's
     implementation(libs.okhttp.core)     //OkHttp
     implementation(libs.okhttp.logging)     //OkHttp
     implementation(libs.google.gson)    //Gson
-    implementation(libs.coil.kt)    //Coil
     implementation(libs.androidx.paging)     //Paging3
+    implementation(libs.viewbinding.property.delegate)
 }
