@@ -24,6 +24,7 @@ gson = "2.14.0"
 paging = "3.5.0"
 ksp = "2.3.8"
 viewbinding-delegate = "1.5.9"
+coil = "2.7.0"
 
 [libraries]
 androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
