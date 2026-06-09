@@ -85,4 +85,5 @@ dependencies {
     implementation(libs.google.gson)    //Gson
     implementation(libs.androidx.paging)     //Paging3
     implementation(libs.viewbinding.property.delegate)
+    ksp(libs.kotlin.metadata.jvm)
 }
