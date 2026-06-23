@@ -74,5 +74,4 @@ dependencies {
     implementation(libs.google.gson)    //Gson
     implementation(libs.androidx.paging)     //Paging3
     implementation(libs.androidx.swiperefreshlayout)
-    implementation(libs.viewbinding.property.delegate)
 }

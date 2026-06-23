@@ -20,7 +20,6 @@ gson = "2.14.0"
 paging = "3.5.0"
 ksp = "2.3.8"
 swiperefreshlayout = "1.2.0"
-viewbinding-delegate = "1.5.9"
 coil = "2.7.0"
 
 [libraries]
@@ -55,7 +54,6 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
-viewbinding-property-delegate = { group = "com.github.kirich1409", name = "viewbindingpropertydelegate-noreflection", version.ref = "viewbinding-delegate" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
