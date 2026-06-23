@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
-    private val bindingInflater: (inflater: LayoutInflater) -> VB
+    private val bindingInflater: (inflater: LayoutInflater, container: ViewGroup?, attachToParent: Boolean) -> VB
 ) : Fragment() {
 
     private var _binding: VB? = null
-    protected val binding: VB get() = _binding as VB
+    protected val binding: VB get() = _binding ?: throw IllegalStateException("Binding is only accessible between onCreateView and onDestroyView")
 
     protected abstract val viewModel: VM
     protected abstract fun onCreateFinished()
@@ -22,13 +22,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        _binding = bindingInflater.invoke(inflater)
-
-        if (_binding == null) {
-            throw IllegalArgumentException("Binding null")
-        }
-
+    ): View {
+        _binding = bindingInflater.invoke(inflater, container, false)
         return binding.root
     }
 

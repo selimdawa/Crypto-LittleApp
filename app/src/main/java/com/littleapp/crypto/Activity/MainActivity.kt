@@ -3,18 +3,27 @@ package com.littleapp.crypto.Activity
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.littleapp.crypto.R
 import com.littleapp.crypto.Unit.THEME
+import com.littleapp.crypto.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    var context: Context = this@MainActivity
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
+
+    private val activityContext: Context by lazy { this }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //THEME.setThemeOfApp(context)
+        //THEME.setThemeOfApp(activityContext)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
