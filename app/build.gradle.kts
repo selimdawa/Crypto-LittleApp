@@ -59,7 +59,6 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     //Lifecycle
-    //implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata)
@@ -77,5 +76,4 @@ dependencies {
     implementation(libs.androidx.paging)     //Paging3
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.viewbinding.property.delegate)
-    ksp(libs.kotlin.metadata.jvm)                       //Kotlin
 }

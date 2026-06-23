@@ -36,7 +36,7 @@ private fun errorBodyParser(error: String?): String {
             val errorResponse = Gson().fromJson(error, ErrorResponse::class.java)
             val errorMessage = errorResponse.status?.errorMessage
             errorMessage ?: getAppContext().resources.getString(R.string.error_message)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             getAppContext().resources.getString(R.string.error_message)
         }
     }
