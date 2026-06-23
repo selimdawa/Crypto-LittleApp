@@ -7,7 +7,6 @@ plugins {
 
 android {
     namespace = "com.littleapp.crypto"
-
     compileSdk {
        version = release(37)
     }
@@ -35,11 +34,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
-    }
     buildFeatures {
         viewBinding = true
         dataBinding = true
@@ -65,7 +59,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     //Lifecycle
-    implementation(libs.androidx.lifecycle.extensions)
+    //implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata)
@@ -81,6 +75,7 @@ dependencies {
     implementation(libs.okhttp.logging)     //OkHttp
     implementation(libs.google.gson)    //Gson
     implementation(libs.androidx.paging)     //Paging3
+    implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.viewbinding.property.delegate)
-    //ksp(libs.kotlin.metadata.jvm)                       //Kotlin
+    ksp(libs.kotlin.metadata.jvm)                       //Kotlin
 }
