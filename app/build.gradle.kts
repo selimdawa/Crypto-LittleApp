@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safeargs)
-    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.ksp.processor)
     alias(libs.plugins.hilt.android)
 }
 
@@ -59,8 +58,6 @@ dependencies {
     //Layout
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
-    implementation(libs.androidx.legacy.support.v4)
-    implementation(libs.androidx.cardview)
     //Image
     implementation(libs.circleimageview)                //Circle image
     implementation(libs.coil.kt)    //Coil
@@ -85,5 +82,5 @@ dependencies {
     implementation(libs.google.gson)    //Gson
     implementation(libs.androidx.paging)     //Paging3
     implementation(libs.viewbinding.property.delegate)
-    ksp(libs.kotlin.metadata.jvm)
+    //ksp(libs.kotlin.metadata.jvm)                       //Kotlin
 }
