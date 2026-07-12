@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.navigation.safeargs)
-    alias(libs.plugins.ksp.processor)
-    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.navigation.safeargs.kotlin)
 }
 
 android {
@@ -52,26 +52,33 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
     //Image
-    implementation(libs.circleimageview)                //Circle image
-    implementation(libs.coil.kt)    //Coil
-    //Navigation
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.ui)
+    implementation(libs.circleimageview)                //Circle Image
+    implementation(libs.coil.kt)                        //Coil Image
     //Lifecycle
-    implementation(libs.androidx.lifecycle.runtime)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    //Coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    //Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    //Dagger - Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.fragment)
     //Retrofit
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.coroutines.adapter)
-    //Dagger - Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    //OkHttp
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
     //Other's
-    implementation(libs.okhttp.core)     //OkHttp
-    implementation(libs.okhttp.logging)     //OkHttp
-    implementation(libs.google.gson)    //Gson
-    implementation(libs.androidx.paging)     //Paging3
+    implementation(libs.google.gson)
+    implementation(libs.androidx.paging)                 //Paging3
     implementation(libs.androidx.swiperefreshlayout)
 }
