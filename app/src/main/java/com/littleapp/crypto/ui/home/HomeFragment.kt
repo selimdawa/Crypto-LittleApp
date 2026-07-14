@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +14,18 @@ import com.littleapp.crypto.base.BaseFragment
 import com.littleapp.crypto.databinding.FragmentHomeBinding
 import com.littleapp.crypto.model.home.Data
 import com.littleapp.crypto.utils.DATA
+import com.littleapp.crypto.utils.DataStoreManager
 import com.littleapp.crypto.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate) {
+
+    @Inject
+    lateinit var dataStoreManager: DataStoreManager
 
     override val viewModel: HomeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private lateinit var mAdapter: HomeRecyclerAdapter
@@ -63,6 +70,9 @@ class HomeFragment :
                 val symbol = coin.symbol
                 val id = coin.id
                 if (!symbol.isNullOrEmpty() && (id != null)) {
+                    lifecycleScope.launch {
+                        dataStoreManager.saveLastNav(id, symbol)
+                    }
                     val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                         symbol = symbol,
                         coinId = id,

@@ -6,7 +6,6 @@ import androidx.navigation.fragment.navArgs
 import com.littleapp.crypto.R
 import com.littleapp.crypto.base.BaseFragment
 import com.littleapp.crypto.databinding.FragmentDetailBinding
-import com.littleapp.crypto.model.detail.DetailResponse
 import com.littleapp.crypto.utils.DATA
 import com.littleapp.crypto.utils.NetworkResult
 import com.littleapp.crypto.utils.loadImage
@@ -28,30 +27,25 @@ class DetailFragment :
     override fun initializeListeners() {}
 
     override fun observeEvents() {
+        collectLifecycleFlow(viewModel.localDetail) { entity ->
+            entity?.let {
+                with(binding) {
+                    ivDetail.loadImage("${DATA.IMAGE_CRYPTO}${it.id}.png")
+                    tvDetailTitle.text = it.name
+                    tvDetailSymbol.text = it.symbol
+                    tvDetailDescription.text = it.description
+                }
+            }
+        }
+
         collectLifecycleFlow(viewModel.detailState) { state ->
             when (state) {
-                is NetworkResult.Loading -> handleView(isLoading = true)
-                is NetworkResult.Success -> {
-                    handleView(isLoading = false)
-                    parseData(state.data)
-                }
-
+                is NetworkResult.Loading -> handleView(isLoading = viewModel.localDetail.value == null)
+                is NetworkResult.Success -> handleView(isLoading = false)
                 is NetworkResult.Error -> {
                     handleView(isLoading = false)
                     toast(state.message)
                 }
-            }
-        }
-    }
-
-    private fun parseData(response: DetailResponse?) {
-        val coin = response?.data?.get(viewModel.symbol)?.firstOrNull()
-        coin?.let {
-            with(binding) {
-                ivDetail.loadImage("${DATA.IMAGE_CRYPTO}${viewModel.coinId}.png")
-                tvDetailTitle.text = it.name
-                tvDetailSymbol.text = it.symbol
-                tvDetailDescription.text = it.description
             }
         }
     }

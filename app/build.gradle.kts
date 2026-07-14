@@ -81,4 +81,5 @@ dependencies {
     implementation(libs.google.gson)
     implementation(libs.androidx.paging)                 //Paging3
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.datastore.preferences)
 }
