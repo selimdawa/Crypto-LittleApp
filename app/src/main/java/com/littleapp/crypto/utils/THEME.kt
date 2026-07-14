@@ -1,4 +1,4 @@
-package com.littleapp.crypto.Unit
+package com.littleapp.crypto.utils
 
 import android.content.Context
 import androidx.preference.PreferenceManager

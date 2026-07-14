@@ -2,8 +2,8 @@ package com.littleapp.crypto.di
 
 import com.google.gson.Gson
 import com.littleapp.crypto.BuildConfig
-import com.littleapp.crypto.Unit.DATA
 import com.littleapp.crypto.network.CryptoApi
+import com.littleapp.crypto.utils.DATA
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,12 +39,9 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClint(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+    fun provideHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS).addInterceptor(httpLoggingInterceptor).build()
     }
 
     @Singleton
@@ -59,11 +56,8 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(DATA.BASE_URL_CRYPTO)
-            .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
-            .build()
+        return Retrofit.Builder().baseUrl(DATA.BASE_URL_CRYPTO).client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory).build()
     }
 
     @Singleton

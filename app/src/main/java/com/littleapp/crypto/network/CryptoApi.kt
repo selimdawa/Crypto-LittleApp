@@ -1,6 +1,6 @@
 package com.littleapp.crypto.network
 
-import com.littleapp.crypto.Unit.DATA
+import com.littleapp.crypto.utils.DATA
 import com.littleapp.crypto.model.detail.DetailResponse
 import com.littleapp.crypto.model.home.CryptoResponse
 import retrofit2.Response

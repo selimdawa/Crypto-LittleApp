@@ -1,11 +1,6 @@
-package com.littleapp.crypto.Unit
+package com.littleapp.crypto.utils
 
 object DATA {
-
-    //Other
-    const val EMPTY = ""
-    const val SPACE = " "
-    const val Unknown = "Unknown"
 
     const val CRYPTO = "Crypto"
     const val BASE_URL_CRYPTO = "https://pro-api.coinmarketcap.com/"
@@ -14,5 +9,5 @@ object DATA {
     const val IMAGE_CRYPTO = "https://s2.coinmarketcap.com/static/img/coins/128x128/"
     const val LATEST_CRYPTO = "v1/cryptocurrency/listings/latest"
     const val INFO_CRYPTO = "v2/cryptocurrency/info"
-    const val Crypto_details = "Crypto Details"
+    const val CRYPTO_DETAILS = "Crypto Details"
 }

@@ -1,4 +1,4 @@
-package com.littleapp.crypto
+package com.littleapp.crypto.utils
 
 import com.littleapp.crypto.Activity.*
 

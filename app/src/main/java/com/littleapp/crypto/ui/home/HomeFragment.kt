@@ -3,23 +3,24 @@ package com.littleapp.crypto.ui.home
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.littleapp.crypto.Unit.DATA
+import com.littleapp.crypto.R
 import com.littleapp.crypto.base.BaseFragment
-import com.littleapp.crypto.model.home.Data
 import com.littleapp.crypto.databinding.FragmentHomeBinding
+import com.littleapp.crypto.model.home.Data
+import com.littleapp.crypto.utils.DATA
+import com.littleapp.crypto.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate) {
 
-    override val viewModel by viewModels<HomeViewModel>()
+    override val viewModel: HomeViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private lateinit var mAdapter: HomeRecyclerAdapter
     private var isCurrentlyLoadingMore = false
 
@@ -36,34 +37,35 @@ class HomeFragment :
     override fun initializeListeners() {}
 
     override fun observeEvents() {
-        with(viewModel) {
-            cryptoList.observe(viewLifecycleOwner) { dataList ->
-                dataList?.let {
-                    mAdapter.setList(it)
-                    isCurrentlyLoadingMore = false
-                }
-            }
-            isLoading.observe(viewLifecycleOwner) { loading ->
-                handleViews(loading)
-            }
-            onError.observe(viewLifecycleOwner) { message ->
-                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-                isCurrentlyLoadingMore = false
-            }
+        collectLifecycleFlow(viewModel.cryptoList) { dataList ->
+            mAdapter.setList(dataList)
+            isCurrentlyLoadingMore = false
+        }
+
+        collectLifecycleFlow(viewModel.isLoading) { loading ->
+            handleViews(loading)
+        }
+
+        collectLifecycleFlow(viewModel.error) { message ->
+            toast(message)
+            if (message != null) isCurrentlyLoadingMore = false
         }
     }
 
     private fun setupRecyclerView() {
         mAdapter = HomeRecyclerAdapter(object : ItemClickListener {
             override fun onItemClick(
-                coin: Data, ivRowImage: ImageView, tvRowTitle: TextView, tvRowSymbol: TextView
+                coin: Data,
+                ivRowImage: ImageView,
+                tvRowTitle: TextView,
+                tvRowSymbol: TextView,
             ) {
                 val symbol = coin.symbol
                 val id = coin.id
-                if (!symbol.isNullOrEmpty() && id != null) {
+                if (!symbol.isNullOrEmpty() && (id != null)) {
                     val navigation = HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                         symbol = symbol,
-                        coinId = id
+                        coinId = id,
                     )
                     findNavController().navigate(navigation)
                 }
@@ -82,7 +84,7 @@ class HomeFragment :
                         val totalItemCount = layoutManager.itemCount
                         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
-                        if (!isCurrentlyLoadingMore && (visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                        if ((!isCurrentlyLoadingMore) && (visibleItemCount + firstVisibleItemPosition >= totalItemCount)) {
                             isCurrentlyLoadingMore = true
                             viewModel.loadNextPage(DATA.API_KEY_CRYPTO)
                         }
