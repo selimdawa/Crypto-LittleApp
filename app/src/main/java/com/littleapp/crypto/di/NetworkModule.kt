@@ -1,12 +1,14 @@
 package com.littleapp.crypto.di
 
+import android.content.Context
+import android.content.pm.ApplicationInfo
 import com.google.gson.Gson
-import com.littleapp.crypto.BuildConfig
 import com.littleapp.crypto.network.CryptoApi
 import com.littleapp.crypto.utils.DATA
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,9 +29,10 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpLoggerInterceptor(): HttpLoggingInterceptor {
+    fun provideHttpLoggerInterceptor(@ApplicationContext context: Context): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
+        val isDebuggable = 0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
+        if (isDebuggable) {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         } else {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
